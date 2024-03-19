@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 60px;
+            background-color: #fefa83;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(100, 211, 255, 0.2);
+        }
+
+        h1 {
+            color: #007BFF;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin: 10px 0;
+            border: 1px solid #f34040;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Colorful result text */
+        #result.spam {
+            color: red;
+        }
+
+        #result.ham {
+            color: green;
+        }
+    </style>
+    <title>Spam Detector</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Spam Detector</h1>
+        <textarea id="messageInput" placeholder="Paste your message here..."></textarea>
+        <button onclick="detectSpam()">Detect</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function detectSpam() {
+            const messageInput = document.getElementById('messageInput');
+            const result = document.getElementById('result');
+            const message = messageInput.value.toLowerCase(); // Convert to lowercase for case-insensitivity
+
+            // Simple spam detection using keywords
+            const spamKeywords = ["buy now", "win a prize", "discount", "click here"];
+            const isSpam = spamKeywords.some(keyword => message.includes(keyword));
+
+            // Display the result randomly as either "Spam" or "Ham"
+            const randomResult = Math.random() < 0.5 ? "Spam" : "Ham";
+
+            result.innerText = `This message is ${randomResult}.`;
+            result.className = randomResult.toLowerCase();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h1>Multilingual Spam Detection</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000000f2; /* A lighter and more neutral background color */
+            color: #727493; /* Darker text color for better readability */
+            margin: 0; /* Remove default margin to use the full viewport */
+            padding: 0; /* Remove default padding to use the full viewport */
+            line-height: 1.6; /* Improved line spacing for better legibility */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Optional: Add a background image for a more aesthetic touch */
+body {
+  background-image: url('your-background-image.jpg');
+  background-size: cover; /* Cover the entire viewport */
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Fixed background for a parallax effect */
+}
+
+/* Optional: Add a subtle box shadow to the body for depth */
+body {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+
+        .container {
+            width: 45%;
+            margin: 100px auto;
+            padding: 25px;
+            background-color: #ffffff00;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Increased and more pronounced box shadow */
+            border: 1px solid rgba(0, 0, 0, 0.1); /* A subtle border to separate the container from the background */
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s; /* Transition effects for interactivity */
+        }
+
+.container:hover {
+  transform: translateY(-5px); /* Slight upward translation on hover for a lifted effect */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Increased and more pronounced box shadow on hover */
+}
+
+
+        .container.left {
+            float: left;
+        }
+
+        .container.right {
+            float: right;
+        }
+
+        h1 {
+            color: #3a4047;
+        }
+
+        textarea, select {
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #ccc; /* Lighter border color for a more realistic look */
+  border-radius: 8px; /* Slightly more rounded corners */
+  padding: 10px;
+  background-color: #f8f8f8; /* A light background color */
+  font-size: 16px; /* Larger font size for better readability */
+  transition: all 0.3s ease; /* Smooth transition for interactivity */
+}
+
+textarea:hover, select:hover {
+  border-color: #888; /* Darker border color on hover for interactivity */
+}
+
+textarea:focus, select:focus {
+  border-color: #000000; /* Highlighted border color for focus state */
+  box-shadow: 0 0 5px rgba(248, 248, 249, 0.5); /* Subtle box shadow for focused state */
+}
+
+
+        button {
+            background: linear-gradient(to bottom, #f7f4f4, #ff0000); /* Gradient background for depth */
+            color: #ffffff; /* Text color */
+            border: 2px solid #ff0000; /* Border to create depth */
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 25px; /* Adjust to control roundness */
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); /* Text shadow for depth */
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Box shadow for button elevation */
+            transition: transform 0.2s, box-shadow 0.2s; /* Transition effects for interactivity */
+        }
+
+button:hover {
+  transform: scale(1.05); /* Scale up on hover for a pressed effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increased box shadow on hover */
+}
+
+
+        button:hover {
+            background-color: #000000;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Styling for realistic spam and ham results */
+#result.spam,
+#result.ham {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#result.spam {
+    background-color: #ff9999; /* Light red background for spam */
+    color: #ff0000; /* Dark red text color for spam */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Text shadow for depth */
+}
+
+#result.ham {
+    background-color: #99ff99; /* Light green background for ham */
+    color: #00aa00; /* Dark green text color for ham */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Text shadow for depth */
+}
+
+#result.spam:hover, #result.ham:hover {
+    background-color: #ff6666; /* Slightly darker background on hover */
+}
+
+    </style>
+    <title>Spam Detector</title>
+</head>
+
+
+<body>
+    <div class="container left" id="container1">
+        <h1>📩 Drop your Text</h1>
+        <select id="languageSelect1">
+            <option value="english">English</option>
+            <option value="spanish">Spanish</option>
+            <option value="french">French</option>
+        </select>
+        <textarea id="messageInput1" placeholder="Paste your message here..."></textarea>
+        <button onclick="detectSpam('1')">Detect</button>
+        <div id="result1"></div>
+    </div>
+
+    <div class="container right" id="container2">
+        <h1>📩Rewrite</h1>
+        <select id="languageSelect2">
+            <option value="spanish">Spanish</option>
+            <option value="english">English</option>
+            <option value="french">French</option>
+        </select>
+        <textarea id="messageInput2" placeholder="Paste your message here..."></textarea>
+        <button onclick="detectSpam('2')">Detect</button>
+        <div id="result2"></div>
+    </div>
+
+    <script>
+        function detectSpam(containerId) {
+            const languageSelect = document.getElementById(`languageSelect${containerId}`);
+            const selectedLanguage = languageSelect.value;
+
+            const messageInput = document.getElementById(`messageInput${containerId}`);
+            const result = document.getElementById(`result${containerId}`);
+            const message = messageInput.value.toLowerCase(); // Convert to lowercase for case-insensitivity
+
+            // Simple spam detection using keywords
+            const spamKeywords = {
+                english: ["buy now", "win a prize", "discount", "click here"],
+                spanish: ["compra ahora", "gana un premio", "descuento", "haz clic aquí"],
+                french: ["achetez maintenant", "gagnez un prix", "réduction", "cliquez ici"]
+            };
+
+            const isSpam = spamKeywords[selectedLanguage].some(keyword => message.includes(keyword));
+
+            // Display the result randomly as either "Spam" or "Ham"
+            const randomResult = Math.random() < 0.5 ? "Spam" : "Ham";
+
+            result.innerText = `This message is ${randomResult}.`;
+            result.className = randomResult.toLowerCase();
+        }
+    </script>
+</body>
+</html>

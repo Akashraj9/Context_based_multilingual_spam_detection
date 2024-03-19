@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realistic Button</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000000f2;
+            color: #727493;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .au-btn--realistic {
+            background: linear-gradient(to bottom, #4c7aaf, #2e4965);
+            color: #ffffff;
+            border: 2px solid #2e4965;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 25px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+
+        .au-btn--realistic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to bottom, #2e4965, #4c7aaf);
+        }
+    </style>
+</head>
+<body>
+    <button class="au-btn au-btn-icon au-btn--blue au-btn--realistic">
+        <a href="Multilingual.html">📩</a>
+        <i class="zmdi zmdi-plus"></i>Spam Ham
+    </button>
+</body>
+</html>

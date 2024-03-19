@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Search Bar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-header {
+            display: flex;
+        }
+
+        .au-input {
+            width: 70%;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            padding: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .au-input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .au-btn--submit {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-left: 10px;
+            transition: background 0.3s;
+        }
+
+        .au-btn--submit:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form class="form-header" action="" method="POST">
+        <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for data & reports..." />
+        <button class="au-btn--submit" type="submit">
+            <i class="zmdi zmdi-search"></i>
+        </button>
+    </form>
+</body>
+</html>
